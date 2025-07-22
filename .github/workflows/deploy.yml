@@ -2,7 +2,7 @@ name: Deploy Flask App
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "project1" ]
 
 jobs:
   build-and-deploy:
