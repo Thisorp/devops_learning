@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  flaskapp:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: flaskapp
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+    networks:
+      - appnet
+    volumes:
+      - flask_logs:/var/log/flask
+  redis:
+    image: redis:alpine
+    container_name: redis
+    networks:
+      - appnet
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ../nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - flaskapp
+    networks:
+      - appnet
+
+networks:
+  appnet:
+
+volumes:
+  flask_logs:
