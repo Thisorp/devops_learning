@@ -15,4 +15,4 @@ jobs:
         run: docker build -t flaskapp .
 
       - name: Deploy with docker-compose
-        run: docker-compose up -d
+        run: docker compose up -d
